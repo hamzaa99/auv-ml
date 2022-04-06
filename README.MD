@@ -7,6 +7,7 @@ version de python : python 3
 - flask : pour creer l'api qui va exposer le modèle
 - pandas : pour la manipulation de données
 - scikit-learn : pour les algorithme de clustering
+- pytest : pour les tests
 
 ## installation  : 
 
