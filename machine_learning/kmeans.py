@@ -17,6 +17,7 @@ antony = villes.loc['92002']
 lyon1 = villes.loc['69381']
 lyon2 = villes.loc['69382']
 chatillon = villes.loc['92020']
+chatillon2 = villes.loc['92020']
 
 
 
@@ -47,6 +48,6 @@ print(f'le label du cluster de lyon 2 est : {labelLyon2}')
 print(f'le label du cluster de chatillon est : {labelChatillon}')
 
 
-pickle_out = open("../api/model.pkl", "wb")
+pickle_out = open("../model.pkl", "wb")
 pickle.dump(kmeans, pickle_out)
 pickle_out.close()

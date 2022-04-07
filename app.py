@@ -9,7 +9,7 @@ import json
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
-villes = pd.read_csv('../data/merged/test.csv',delimiter=",",header=0,index_col='CODGEO', dtype={'CODGEO': 'str'})
+villes = pd.read_csv('data/merged/test.csv', delimiter=",", header=0, index_col='CODGEO', dtype={'CODGEO': 'str'})
 
 
 
