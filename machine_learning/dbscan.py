@@ -5,27 +5,33 @@ from numpy import where
 from sklearn.datasets import make_classification
 from sklearn.cluster import DBSCAN
 from matplotlib import pyplot
+import numpy as np
+from sklearn import metrics
+
 
 ## dossier prenant en compte uniquement les données liées au commerce
 villes = pd.read_csv('../data/merged/test.csv',delimiter=",",header=0,index_col='CODGEO', dtype={'CODGEO': 'str'})
 
 
-# print(villes.head())
-# print(villes.dtypes)
-drancy = villes.loc['93029']
-laCourneuve = villes.loc['93027']
-annecy = villes.loc['74010']
-sceaux = villes.loc['92071']
-antony = villes.loc['92002']
-lyon1 = villes.loc['69381']
-lyon2 = villes.loc['69382']
-chatillon = villes.loc['92020']
+# Compute DBSCAN
+db = DBSCAN(eps=0.3, min_samples=10).fit(villes)
+core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+core_samples_mask[db.core_sample_indices_] = True
+labels = db.labels_
+labels_true = villes
+
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+n_noise_ = list(labels).count(-1)
 
 
-model = DBSCAN(eps=0.30, min_samples=9)
-yhat = model.fit_predict(villes)
-clusters = unique(yhat)
-for cluster in clusters:
-	row_ix = where(yhat == cluster)
-	pyplot.scatter(villes[row_ix, 0], villes[row_ix, 1])
-pyplot.show()
+print("Estimated number of clusters: %d" % n_clusters_)
+print("Estimated number of noise points: %d" % n_noise_)
+print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels_true, labels))
+print("Completeness: %0.3f" % metrics.completeness_score(labels_true, labels))
+print("V-measure: %0.3f" % metrics.v_measure_score(labels_true, labels))
+print("Adjusted Rand Index: %0.3f" % metrics.adjusted_rand_score(labels_true, labels))
+print(
+    "Adjusted Mutual Information: %0.3f"
+    % metrics.adjusted_mutual_info_score(labels_true, labels)
+)
+print("Silhouette Coefficient: %0.3f" % metrics.silhouette_score(X, labels))
