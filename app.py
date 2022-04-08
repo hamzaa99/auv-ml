@@ -23,7 +23,6 @@ def home():
 def predict():
 
     payload = request.get_json()
-    labels = model.predict(villes)
     ville = villes.loc[payload['ville']]
     labelPrediction = model.predict([ville])
 
