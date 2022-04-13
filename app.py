@@ -30,9 +30,10 @@ def predict():
     cluster_map['data_index'] = villes.index
     cluster_map['cluster'] = model.labels_
 
+    result = cluster_map[cluster_map.cluster == labelPrediction[0]]
 
 
-    return cluster_map[cluster_map.cluster == labelPrediction[0]].to_json(orient="split")
+    return result[:10].to_json(orient="split")
 
 
 
