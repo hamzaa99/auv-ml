@@ -11,7 +11,6 @@ version de python : python 3
 
 ## installation  : 
 
-à definir
 
 ## Machine learning :
 
