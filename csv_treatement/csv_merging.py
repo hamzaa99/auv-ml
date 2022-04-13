@@ -5,7 +5,7 @@ ens = pd.read_csv("../data/insee/equip-serv-ens-1er-degre-com-2020.csv",delimite
 ens_sup = pd.read_csv("../data/insee/equip-serv-ens-sup-form-serv-com-2020.csv",delimiter=";",header=0,index_col=0, dtype={'CODGEO': 'str'})
 sport_loisir = pd.read_csv("../data/insee/equip-sport-loisir-socio-com-2020.csv",delimiter=";",header=0,index_col=0, dtype={'CODGEO': 'str'})
 tourisme = pd.read_csv("../data/insee/equip-tour-transp-com-2020.csv",delimiter=";",header=0,index_col=0, dtype={'CODGEO': 'str'})
-pop = pd.read_csv("../data/insee/communes.csv",delimiter=";",header=0,index_col=0, dtype={'CODGEO': 'str'})
+pop = pd.read_csv("../data/insee/communes.csv",delimiter=";",header=0,index_col=0, dtype={'CODGEO': 'str'}, usecols=[0,2,3,4])
 
 frames = [commerce, ens, ens_sup, sport_loisir, tourisme,pop]
 
